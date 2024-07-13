@@ -32,6 +32,7 @@ function Count() {
     <div>
       <div>Count:{count} </div>
       <Button />
+      {(count % 2 ==0) && <p>It is even</p>}
     </div>
   )
 }
