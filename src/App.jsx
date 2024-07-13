@@ -1,44 +1,68 @@
 
 import './App.css'
 
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
+import { todoAtomFamily } from './atomFamily';
 
-import { totalNotificationsSelector,notificationsAtom2 } from './ayncAtoms';
+
 
 
 function App() {
 
   return (
     <RecoilRoot>
-      <LinkedInNav/>
+      <Todos/>
     </RecoilRoot>
   )
 }
 
-/*------------------------------*/
-/*LinkedIn nav mimic*/
-function LinkedInNav() {
 
-  const HomeNotificationCount = useRecoilValue(notificationsAtom2).home;
-  const jobsNotificationCount = useRecoilValue(notificationsAtom2).jobs;
-  const networkNotificationCount = useRecoilValue(notificationsAtom2).network;
-  const notificationCount = useRecoilValue(notificationsAtom2).notifications;
+function Todos() {
 
 
-  const totalNotifications = useRecoilValue(totalNotificationsSelector)
+
+    const setTodo = useSetRecoilState(todoAtomFamily(1));
+
+    const updateTodoHandler = ()=>{
+      setTodo(todo => {
+        return {
+          ...todo,
+          completed : !todo.completed
+        }
+      })
+    }
+
+
 
   return (
     <div>
-      <button>Home ({HomeNotificationCount})</button>
-      <button>Network  ({networkNotificationCount})</button>
-      <button>Notifications  ({notificationCount})</button>
-      <button>Jobs  ({jobsNotificationCount})</button>
-      <button>Me ({totalNotifications})</button>
+        <Todo id={1} />
+        <Todo id={2} />
+        <Todo id={3} />
+        <Todo id={1} />
+        <Todo id={2} />
+        <Todo id={3} />
+        <button onClick={updateTodoHandler}>Update Todo</button>
+    </div>
+  )
+
+
+
+}
+
+function Todo({id}) {
+  
+  const todo = useRecoilValue(todoAtomFamily(id));
+
+  return (
+    <div>
+        <h2>{todo.title}</h2>
+        <p>{todo.description}</p>
+        <p>{(todo.completed).toString()}</p>
+        <br />
     </div>
   )
 }
-
-
 
 /*------------------------------*/
 
