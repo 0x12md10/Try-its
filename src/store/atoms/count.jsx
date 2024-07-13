@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 
 export const counterAtom = atom({
@@ -48,3 +48,11 @@ Note : This is similar to we using useMemo to get a derived state.
     });`
 
     */
+
+    export const evenSelector = selector({
+        key : "evenSelector",
+        get : ({get}) => {
+            const count = get(counterAtom);
+            return count %2;
+        }
+    })
