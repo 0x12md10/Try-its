@@ -3,6 +3,7 @@ import './App.css'
 
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
 import { todoAtomFamily } from './atomFamily';
+import { Suspense } from 'react';
 
 
 
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <RecoilRoot>
-      <Todos/>
+      <Suspense fallback={"loading...."}><Todos/></Suspense>
     </RecoilRoot>
   )
 }

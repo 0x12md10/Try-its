@@ -1,28 +1,25 @@
-import { atomFamily } from "recoil";
+import axios from "axios";
+import { atomFamily, selectorFamily } from "recoil";
 
 
-export const TODOS = [
-    {
-        id : 1,
-        title : "Wake up at 5 a.m.",
-        description : "ironically I won't",
-        completed : false
-    },
-    {
-        id : 2,
-        title : "Go for a 1 hour jog.",
-        description : "this will make you fit",
-        completed : false
-    },
-    {
-        id : 3,
-        title : "Go to library everyday 6 p.m.",
-        description : "will make you bujji",
-        completed : false
-    }
-]
+
+//synchronous way
+
+// export const todoAtomFamily = atomFamily({
+//     key : "todoAtomFamily",
+//     default : id => TODOS.find(item => item.id === id)
+// })
+
+// async way
 
 export const todoAtomFamily = atomFamily({
-    key : "todoAtomFamily",
-    default : id => TODOS.find(item => item.id === id)
+    key : "todoAtomsFamily2",
+    default : selectorFamily({
+        key : "todoAtomsFamily2/selectorFamily",
+        get : id => async ({get}) => {
+            await new Promise(r=> setTimeout(r,3000))
+            const data = await axios.get(`http://localhost:3000/${id-1}`) ;
+            return (data.data);
+        }
+    })
 })

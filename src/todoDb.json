@@ -1,0 +1,20 @@
+[
+    {
+        "id" : 0,
+        "title" : "Wake up at 5 a.m.",
+        "description" : "ironically I won't",
+        "completed" : false
+    },
+    {
+        "id" : 1,
+        "title" : "Go for a 1 hour jog.",
+        "description" : "this will make you fit",
+        "completed" : false
+    },
+    {
+        "id" : 2,
+        "title" : "Go to library everyday 6 p.m.",
+        "description" : "will make you bujji",
+        "completed" : false
+    }
+]
