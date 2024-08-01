@@ -10,8 +10,9 @@ import './App.css'
 import { CountContext } from './context';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import Nav from './Nav';
+import useTodos from './useTodos';
 
-function App() {
+{/*function App() {
 
 
 
@@ -30,9 +31,24 @@ function App() {
   )
 }
 
+*/}
 
 
+function App () {
+
+  const todos = useTodos()
+  console.log(todos);
+  return (
+    <div>{todos ? todos.forEach(todo => <Todo key={todo.id} title ={todo.todo}/>) : "No todos"}</div>
+    
+  )
+}
 
 
+function Todo({title}) {
+  return (
+    <div>{title } - {description}</div>
+  )
+}
 
 export default App
